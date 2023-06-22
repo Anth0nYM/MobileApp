@@ -36,7 +36,7 @@ const [error, setError] = useState(null);
       {pokemon && (
         <View style={{ alignItems: 'center' }}>
           <Image
-            source={{ uri: pokemon.sprites.front_default }}
+            source={{ uri: pokemon.sprites.front_shiny }}
             style={{ width: 200, height: 200, marginBottom: 20 }}
           />
           <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>
