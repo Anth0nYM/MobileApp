@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import axios from 'axios';
+import { fetchRandomPokemon } from '../api';
 
 const HomeScreen = () => {
   const [pokemon, setPokemon] = useState(null);
 
-  const fetchRandomPokemon = async () => {
+  const handleFetchRandomPokemon = async () => {
     try {
-      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=1000');
-      const { results } = response.data;
-      const randomIndex = Math.floor(Math.random() * results.length);
-      const randomPokemon = results[randomIndex];
-
-      const pokemonResponse = await axios.get(randomPokemon.url);
-      setPokemon(pokemonResponse.data);
+      const randomPokemon = await fetchRandomPokemon();
+      setPokemon(randomPokemon);
     } catch (error) {
-      console.log('Error fetching random Pokémon:', error);
+      // Trate o erro de acordo com sua necessidade
     }
   };
 
@@ -30,7 +25,7 @@ const HomeScreen = () => {
           alignItems: 'center',
           marginBottom: 20,
         }}
-        onPress={fetchRandomPokemon}
+        onPress={handleFetchRandomPokemon}
       >
         <Text style={{ color: 'white', fontSize: 16 }}>Get Random Pokémon</Text>
       </TouchableOpacity>
